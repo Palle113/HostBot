@@ -114,7 +114,7 @@ Namespace Links
         Private ReadOnly master As IDependencyLinkMaster
         Private ReadOnly servant As IDependencyLinkServant
         Private broken As Boolean = False
-        Private ReadOnly ref As New ThreadedCallQueue(Me.GetType.Name)
+        Private ReadOnly ref As ICallQueue = New ThreadPooledCallQueue
         Private Sub New(ByVal master As IDependencyLinkMaster, ByVal servant As IDependencyLinkServant)
             If Not (master IsNot Nothing) Then Throw New ArgumentException()
             If Not (servant IsNot Nothing) Then Throw New ArgumentException()

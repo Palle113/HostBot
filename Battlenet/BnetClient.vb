@@ -130,8 +130,8 @@ Namespace Bnet
             Me.profile = profile
             Me.listen_port = profile.listen_port
             Me.logger = If(logger, New MultiLogger)
-            Me.eventRef = New ThreadedCallQueue("{0} {1} eventRef".frmt(Me.GetType.Name, name))
-            Me.ref = New ThreadedCallQueue("{0} {1} ref".frmt(Me.GetType.Name, name))
+            Me.eventRef = New ThreadPooledCallQueue
+            Me.ref = New ThreadPooledCallQueue
 
             'Init crypto
             With Bnet.Crypt.generatePublicPrivateKeyPair(New System.Random())

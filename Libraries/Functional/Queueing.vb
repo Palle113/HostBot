@@ -121,4 +121,13 @@ Namespace Functional.Queueing
             threadedCall(AddressOf Run, thread_name)
         End Sub
     End Class
+    Public Class ThreadPooledCallQueue
+        Inherits BaseCallQueue
+        Protected Overrides Sub StartRunning()
+            Threading.ThreadPool.QueueUserWorkItem(AddressOf _run)
+        End Sub
+        Private Sub _run(ByVal state As Object)
+            Call Run()
+        End Sub
+    End Class
 End Namespace

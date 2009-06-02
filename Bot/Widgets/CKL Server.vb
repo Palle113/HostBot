@@ -68,7 +68,7 @@ Namespace CKL
     Public Class CKLClient
         Private WithEvents socket As BnetSocket
         Private ReadOnly f As New Future(Of Outcome(Of CKLBorrowedKeyVals))
-        Private ReadOnly ref As New ThreadedCallQueue(Me.GetType.name)
+        Private ReadOnly ref As New ThreadPooledCallQueue
         Private ReadOnly payload As Byte()
         Private WithEvents timeout As New Timers.Timer()
         '''<summary>Returns a future of the outcome of borrowing keys from the server.</summary>

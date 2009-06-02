@@ -3,7 +3,7 @@ Namespace Logging
         Public Event LoggedMessage(ByVal message As Func(Of String))
         Private ReadOnly ref As ICallQueue
         Public Sub New(Optional ByVal pq As ICallQueue = Nothing)
-            Me.ref = If(pq, New ThreadedCallQueue(Me.GetType.Name))
+            Me.ref = If(pq, New ThreadPooledCallQueue)
         End Sub
 
         Private Sub log_L(ByVal message As Func(Of String))
@@ -33,7 +33,7 @@ Namespace Logging
         Private ReadOnly lock As New Object()
         Public Event LoggedMessage(ByVal type As LogMessageTypes, ByVal message As Func(Of String))
         Public Event LoggedFutureMessage(ByVal placeholder As String, ByVal message As IFuture(Of Outcome))
-        Private ReadOnly ref As New ThreadedCallQueue(Me.GetType.Name)
+        Private ReadOnly ref As New ThreadPooledCallQueue
 
         Private Function raise(ByVal type As LogMessageTypes, ByVal message As Func(Of String)) As Boolean
             RaiseEvent LoggedMessage(type, message)

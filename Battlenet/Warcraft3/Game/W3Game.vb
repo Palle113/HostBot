@@ -166,8 +166,8 @@ Namespace Warcraft3
             Me.map = ContractNotNull(map, "map")
             Me.parent = ContractNotNull(parent, "parent")
             Me.name = ContractNotNull(name, "name")
-            Me.eventRef = New ThreadedCallQueue("{0} {1} eventRef".frmt(Me.GetType.Name, name))
-            Me.ref = If(ref, New ThreadedCallQueue("{0} {1} ref".frmt(Me.GetType.Name, name)))
+            Me.eventRef = New ThreadPooledCallQueue
+            Me.ref = If(ref, New ThreadPooledCallQueue)
             Me.logger = If(logger, New MultiLogger)
             For i = 0 To index_map.Length - 1
                 index_map(i) = CByte(i)
@@ -411,7 +411,7 @@ Namespace Warcraft3
             If password IsNot Nothing Then
                 p.admin_tries += 1
                 If p.admin_tries > 5 Then Return failure("Too many tries.")
-                If password.ToLower() <> parent.settings.admin_password.ToLower() Then failure("Incorrect password.")
+                If password.ToLower() <> parent.settings.admin_password.ToLower() Then Return failure("Incorrect password.")
             End If
 
             admin_player = p

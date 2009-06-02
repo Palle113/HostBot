@@ -1,14 +1,14 @@
 Imports HostBot.Commands
 Imports HostBot.Warcraft3
-
+ 
 Namespace Commands.Specializations
     Public Class InstancePlayCommands
         Inherits InstanceCommands(Of IW3GamePlay)
-
+ 
         Public Sub New()
             add_subcommand(New com_Disconnect)
         End Sub
-
+ 
         '''<summary>A command which disconnects the bot from the instance.</summary>
         Public Class com_Disconnect
             Inherits BaseCommand(Of IW3GamePlay)
@@ -23,10 +23,10 @@ Namespace Commands.Specializations
             End Function
         End Class
     End Class
-
+ 
     Public Class InstanceSetupCommands
         Inherits InstanceCommands(Of IW3GameLobby)
-
+ 
         Public Sub New()
             add_subcommand(New com_Cancel)
             add_subcommand(New com_Close)
@@ -43,7 +43,7 @@ Namespace Commands.Specializations
             add_subcommand(New com_Swap)
             add_subcommand(New com_Unlock)
         End Sub
-
+ 
         '''<summary>A command which opens a slot.</summary>
         Public Class com_Open
             Inherits BaseCommand(Of IW3GameLobby)
@@ -56,7 +56,7 @@ Namespace Commands.Specializations
                 Return target.f_OpenSlot(arguments(0))
             End Function
         End Class
-
+ 
         '''<summary>A command which closes a slot.</summary>
         Public Class com_Close
             Inherits BaseCommand(Of IW3GameLobby)
@@ -69,7 +69,7 @@ Namespace Commands.Specializations
                 Return target.f_CloseSlot(arguments(0))
             End Function
         End Class
-
+ 
         '''<summary>A command which sets a slot's team.</summary>
         Public Class com_SetTeam
             Inherits BaseCommand(Of IW3GameLobby)
@@ -88,7 +88,7 @@ Namespace Commands.Specializations
                 Return target.f_SetSlotTeam(arg_slot, val_team)
             End Function
         End Class
-
+ 
         '''<summary>A command which preps slots for a particular number of players.</summary>
         Public Class com_SetTeams
             Inherits BaseCommand(Of IW3GameLobby)
@@ -103,7 +103,7 @@ Namespace Commands.Specializations
                 Return target.f_TrySetTeamSizes(out.val)
             End Function
         End Class
-
+ 
         '''<summary>A command which sets a slot's handicap.</summary>
         Public Class com_SetHandicap
             Inherits BaseCommand(Of IW3GameLobby)
@@ -125,7 +125,7 @@ Namespace Commands.Specializations
                 End Select
             End Function
         End Class
-
+ 
         '''<summary>A command which sets a slot's color.</summary>
         Public Class com_SetColor
             Inherits BaseCommand(Of IW3GameLobby)
@@ -144,7 +144,7 @@ Namespace Commands.Specializations
                 Return futurize(failure("Unrecognized color: '{0}'.".frmt(arg_color)))
             End Function
         End Class
-
+ 
         '''<summary>A command which swaps the contents of two slots.</summary>
         Public Class com_Swap
             Inherits BaseCommand(Of IW3GameLobby)
@@ -157,7 +157,7 @@ Namespace Commands.Specializations
                 Return target.f_SwapSlotContents(arguments(0), arguments(1))
             End Function
         End Class
-
+ 
         '''<summary>A command which places a computer in a slot.</summary>
         Public Class com_SetComputer
             Inherits BaseCommand(Of IW3GameLobby)
@@ -176,7 +176,7 @@ Namespace Commands.Specializations
                 Return futurize(failure("Unrecognized difficulty: '{0}'.".frmt(arg_difficulty)))
             End Function
         End Class
-
+ 
         '''<summary>A command which stops players from leaving a slot.</summary>
         Public Class com_Lock
             Inherits BaseCommand(Of IW3GameLobby)
@@ -193,7 +193,7 @@ Namespace Commands.Specializations
                 End If
             End Function
         End Class
-
+ 
         '''<summary>A command which enables players to leave and modify a slot.</summary>
         Public Class com_Unlock
             Inherits BaseCommand(Of IW3GameLobby)
@@ -210,7 +210,7 @@ Namespace Commands.Specializations
                 End If
             End Function
         End Class
-
+ 
         '''<summary>A command which stops players from modifying or leaving a slot.</summary>
         Public Class com_Freeze
             Inherits BaseCommand(Of IW3GameLobby)
@@ -227,7 +227,7 @@ Namespace Commands.Specializations
                 End If
             End Function
         End Class
-
+ 
         '''<summary>A command which reserves a slot for a player.</summary>
         Public Class com_Reserve
             Inherits BaseCommand(Of IW3GameLobby)
@@ -240,7 +240,7 @@ Namespace Commands.Specializations
                 Return target.f_ReserveSlot(arguments(0), arguments(1))
             End Function
         End Class
-
+ 
         '''<summary>A command which starts the launch countdown.</summary>
         Public Class com_Start
             Inherits BaseCommand(Of IW3GameLobby)
@@ -253,7 +253,7 @@ Namespace Commands.Specializations
                 Return target.f_StartCountdown()
             End Function
         End Class
-
+ 
         '''<summary>A command which kills the instance.</summary>
         Public Class com_Cancel
             Inherits BaseCommand(Of IW3GameLobby)
@@ -267,14 +267,14 @@ Namespace Commands.Specializations
             End Function
         End Class
     End Class
-
+ 
     Public Class InstanceAdminCommands
         Inherits CommandSet(Of IW3Game)
-
+ 
         Public Sub New()
             add_subcommand(New com_Bot)
         End Sub
-
+ 
         Public Class com_Bot
             Inherits BaseCommand(Of IW3Game)
             Public Sub New()
@@ -287,14 +287,14 @@ Namespace Commands.Specializations
             End Function
         End Class
     End Class
-
+ 
     Public Class InstanceCommands(Of T As IW3GamePart)
         Inherits InstanceBaseCommands(Of T)
-
+ 
         Public Sub New()
             add_subcommand(New com_Boot)
         End Sub
-
+ 
         '''<summary>A command which boots players from a slot.</summary>
         Public Class com_Boot
             Inherits BaseCommand(Of T)
@@ -308,15 +308,15 @@ Namespace Commands.Specializations
             End Function
         End Class
     End Class
-
+ 
     Public Class InstanceBaseCommands(Of T As IW3GamePart)
         Inherits UICommandSet(Of T)
-
+ 
         Public Sub New()
             add_subcommand(New com_Ping)
             add_subcommand(New com_Leave)
         End Sub
-
+ 
         '''<summary>A command which disconnects the bot from the instance.</summary>
         Public Class com_Ping
             Inherits BaseCommand(Of T)
@@ -337,7 +337,7 @@ Namespace Commands.Specializations
                 Return success(msg)
             End Function
         End Class
-
+ 
         Public Class com_Leave
             Inherits BaseCommand(Of T)
             Public Sub New()
@@ -351,15 +351,15 @@ Namespace Commands.Specializations
             End Function
         End Class
     End Class
-
+ 
     Public Class InstanceGuestSetupCommands
         Inherits InstanceBaseCommands(Of IW3GameLobby)
-
+ 
         Public Sub New()
             add_subcommand(New com_Elevate)
             add_subcommand(New com_VoteStart)
         End Sub
-
+ 
         Public Class com_VoteStart
             Inherits BaseCommand(Of IW3GameLobby)
             Public Sub New()
@@ -373,7 +373,7 @@ Namespace Commands.Specializations
                 Return target.f_PlayerVoteToStart(user.name, arguments.Count = 0)
             End Function
         End Class
-
+ 
         Public Class com_Elevate
             Inherits BaseCommand(Of IW3GameLobby)
             Public Sub New()

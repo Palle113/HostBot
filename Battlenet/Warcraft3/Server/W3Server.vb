@@ -60,8 +60,8 @@ Namespace Warcraft3
                 Me.suffix = suffix
                 Me.logger = If(logger, New MultiLogger)
                 Me.door = New W3ServerDoor(Me, Me.logger)
-                Me.eref = New ThreadedCallQueue("{0} {1} eref".frmt(Me.GetType.Name, name))
-                Me.ref = New ThreadedCallQueue("{0} {1} ref".frmt(Me.GetType.Name, name))
+                Me.eref = New ThreadPooledCallQueue
+                Me.ref = New ThreadPooledCallQueue
 
                 For Each port In settings.default_listen_ports
                     Dim out = door.accepter.accepter.OpenPort(port)

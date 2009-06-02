@@ -59,8 +59,8 @@ Public NotInheritable Class MainBot
     Public Sub New(ByVal warden_ref As ICallQueue, Optional ByVal logger As MultiLogger = Nothing)
         Me.warden_ref = ContractNotNull(warden_ref, "warden_ref")
         Me.logger = If(logger, New MultiLogger)
-        Me.eventRef = New ThreadedCallQueue("{0} eref".frmt(Me.GetType.Name))
-        Me.ref = New ThreadedCallQueue("{0} ref".frmt(Me.GetType.Name))
+        Me.eventRef = New ThreadPooledCallQueue
+        Me.ref = New ThreadPooledCallQueue
         If My.Settings.botstore <> "" Then
             Try
                 Using m As New IO.MemoryStream(packString(My.Settings.botstore))

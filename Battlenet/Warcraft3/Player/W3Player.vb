@@ -52,8 +52,8 @@
             Me.load_screen = New W3PlayerLoadScreen(Me)
             Me.gameplay = New W3PlayerGameplay(Me)
             Me.logger = If(logger, New MultiLogger)
-            Me.eventRef = New ThreadedCallQueue("{0} {1} eventRef".frmt(Me.GetType.Name, name))
-            Me.ref = If(ref, New ThreadedCallQueue("{0} {1} ref".frmt(Me.GetType.Name, name)))
+            Me.eventRef = New ThreadPooledCallQueue
+            Me.ref = If(ref, New ThreadPooledCallQueue)
             Me.game = game
             Me.index = index
             If name.Length > MAX_NAME_LENGTH Then
@@ -76,8 +76,8 @@
             Me.gameplay = New W3PlayerGameplay(Me)
             Me.logger = If(logging, New MultiLogger)
             p.socket.logger = Me.logger
-            Me.eventRef = New ThreadedCallQueue("{0} {1} eventRef".frmt(Me.GetType.Name, name))
-            Me.ref = If(ref, New ThreadedCallQueue("{0} {1} ref".frmt(Me.GetType.Name, name)))
+            Me.eventRef = New ThreadPooledCallQueue
+            Me.ref = If(ref, New ThreadPooledCallQueue)
             Me.game = game
             Me.p2p_key = p.p2p_key
 
